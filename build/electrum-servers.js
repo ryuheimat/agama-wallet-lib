@@ -12,7 +12,6 @@ var _electrumServers = {
   zilla: ['electrum1.cipig.net:10028:tcp', 'electrum2.cipig.net:10028:tcp'],
   prlpay: ['electrum1.prlpay.com:9681:tcp', 'electrum2.prlpay.com:9681:tcp'],
   koin: ['dalian.koinon.cloud:50001:tcp', 'sumba.koinon.cloud:50001:tcp'],
-  pgt: ['agama.komodo.build:10002:tcp', 'agama2.komodo.build:10002:tcp'],
   kv: ['electrum1.cipig.net:10016:tcp', 'electrum2.cipig.net:10016:tcp'],
   bntn: ['electrum1.cipig.net:10026:tcp', 'electrum2.cipig.net:10026:tcp'],
   eql: ['159.65.91.235:10801:tcp', '167.99.204.42:10801:tcp'],
@@ -136,7 +135,8 @@ var _electrumServers = {
   aywa: ['electrum1.getaywa.org:50001:tcp', 'electrum2.getaywa.org:50001:tcp'],
   xbc: ['electrumx1.bitcoinplus.org:50001:tcp', 'electrumx2.bitcoinplus.org:50001:tcp'],
   bbk: ['194.87.145.250:50050:ssl'],
-  uis: ['194.87.145.250:50040:ssl']
+  uis: ['194.87.145.250:50040:ssl'],
+  pgt: ['electrum1.pungo.cloud:10002:tcp, electrum2.pungo.cloud:10002:tcp']
 };
 
 var electrumServers = {};
