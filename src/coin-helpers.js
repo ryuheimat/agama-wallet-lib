@@ -3,6 +3,7 @@ const _komodoAssetChains = [
   'SUPERNET',
   'REVS',
   'PANGEA',
+  'PGT',
   'DEX',
   'JUMBLR',
   'BET',
@@ -33,33 +34,51 @@ const _komodoAssetChains = [
   'CHAIN',
   'ZILLA',
   'DSEC',
+  'MGNX',
+  'CCL',
+  'PIRATE',
+  'KOIN',
+  'DION',
+  'KMDICE',
+  'PTX',
+  'ZEX',
+  'SPLTEST',
+  'LUMBER',
 ];
 
 const _komodoCoins = _komodoAssetChains.concat([
   'CHIPS',
   'KMD',
-  'KOMODO'
+  'KOMODO',
 ]);
 
-const isKomodoCoin = (coin, skipKMD) => {
-  return (_komodoCoins.find((element) => {
-    if (skipKMD) {
-      return element === coin.toUpperCase() && coin.toUpperCase() !== 'KMD' && coin.toUpperCase() !== 'KOMODO';
-    } else {
-      return element === coin.toUpperCase();
-    }
-  }));
-}
+const isKomodoCoin = (coin, skipKMD) => (_komodoCoins.find((element) => {
+  if (skipKMD) {
+    return element === coin.toUpperCase() &&
+           coin.toUpperCase() !== 'KMD' &&
+           coin.toUpperCase() !== 'KOMODO';
+  }
+  return element === coin.toUpperCase();
+}));
 
 // TODO: add at least 2 explorers per coin
 const explorerList = {
   KMD: 'https://www.kmdexplorer.io',
+  // KMD asset chains
+  DION: 'https://explorer.dionpay.com',
+  KOIN: 'http://live.block.koinon.cloud',
+  PTX: 'http://explorer1.patenttx.com',
+  ZILLA: 'http://zilla.explorer.dexstats.info',
+  MGNX: 'http://mgnx.explorer.dexstats.info',
+  CCL: 'http://ccl.explorer.dexstats.info',
+  PIRATE: 'http://pirate.explorer.dexstats.info',
   KV: 'https://kv.kmdexplorer.io',
   OOT: 'http://explorer.utrum.io',
   BNTN: 'http://chain.blocnation.io',
   CHAIN: 'http://explorer.chainmakers.co',
   GLXT: 'http://glx.info',
   PRLPAY: 'http://explorer.prlpay.com',
+  PGT: 'https://pgt.komodo.build/',
   MSHARK: 'https://mshark.kmdexplorer.io',
   REVS: 'https://revs.kmdexplorer.io',
   SUPERNET: 'https://supernet.kmdexplorer.io',
@@ -73,7 +92,7 @@ const explorerList = {
   BOTS: 'https://bots.kmdexplorer.io',
   MGW: 'https://mgw.kmdexplorer.io',
   WLC: 'https://wlc.kmdexplorer.io',
-  CHIPS: 'http://CHIPS1.explorer.supernet.org',
+  CHIPS: 'https://explorer.chips.cash',
   COQUI: 'https://explorer.coqui.cash',
   EQL: 'http://178.62.240.191',
   MNZ: 'https://mnz.kmdexplorer.io',
@@ -81,11 +100,17 @@ const explorerList = {
   BTC: 'https://blockchain.info',
   HUSH: 'https://explorer.myhush.org',
   PIZZA: 'http://pizza.komodochainz.info',
-  BEER: 'http://beer.komodochainz.info',
+  BEER: 'https://beer.kmdexplorer.io',
   NINJA: 'https://ninja.kmdexplorer.io',
   VOTE2018: 'http://88.99.226.252',
   DSEC: 'https://dsec.kmdexplorer.io',
-  VRSC: 'https://vrsc.kmdexplorer.io',
+  VRSC: 'https://explorer.veruscoin.io',
+  DION: 'https://explorer.dionpay.com',
+  KMDICE: 'http://kmdice.explorer.dexstats.info',
+  PTX: 'http://explorer1.patenttx.com',
+  ZEX: 'http://zex.explorer.dexstats.info',
+  LUMBER: 'https://explorer.lumberscout.io',
+  // non-kmd coins
   QTUM: 'https://explorer.qtum.org',
   DNR: 'http://denarius.name',
   LTC: 'https://live.blockcypher.com/ltc/tx/',
@@ -109,6 +134,7 @@ const explorerList = {
   BTX: 'http://explorer.bitcore.cc',
   BTCZ: 'https://explorer.bitcoinz.site',
   HODLC: 'http://www.fuzzbawls.pw/explore/HOdlcoin/tx.php?tx=',
+  SUQA: 'http://suqaexplorer.com',
   SIB: 'https://chain.sibcoin.net/en/tx/',
   ZEC: 'https://explorer.zcha.in/transactions/',
   BLK: 'https://explorer.coinpayments.net/transaction.php?chain=4&hash=',
@@ -116,7 +142,7 @@ const explorerList = {
   FAIR: 'https://chain.fair.to/transaction?transaction=',
   CRAVE: 'http://explorer.craveproject.net',
   FTC: 'https://explorer.feathercoin.com',
-  NLG:  'https://guldenchain.com',
+  NLG: 'https://guldenchain.com',
   PIVX: 'http://www.presstab.pw/phpexplorer/PIVX/tx.php?tx=',
   DMD: 'https://chainz.cryptoid.info/dmd/search.dws?q=',
   EFL: 'https://chainz.cryptoid.info/efl/search.dws?q=',
@@ -126,6 +152,9 @@ const explorerList = {
   EMC2: 'https://chainz.cryptoid.info/emc2/search.dws?q=',
   IXC: 'https://chainz.cryptoid.info/ixc/search.dws?q=',
   DGC: 'https://chainz.cryptoid.info/dgc/search.dws?q=',
+  XMY: 'https://chainz.cryptoid.info/xmy/search.dws?q=',
+  MUE: 'https://chainz.cryptoid.info/mue/search.dws?q=',
+  UNO: 'https://chainz.cryptoid.info/uno/search.dws?q=',
   VOX: 'http://206.189.74.116:3001',
   AUR: 'http://insight.auroracoin.is',
   LBC: 'https://explorer.lbry.io',
@@ -136,9 +165,21 @@ const explorerList = {
   LINX: 'http://explorer.mylinx.io/?',
   CDN: 'https://explorer.canadaecoin.ca',
   FLASH: 'https://explorer.flashcoin.io',
-  ZILLA: 'http://zilla.explorer.dexstats.info',
   XZC: 'https://explorer.zcoin.io',
-  VRSC: 'https://explorer.veruscoin.io',
+  XMCC: 'http://block.monacocoin.net:8080/tx/',
+  STAK: 'https://straks.info/transaction/',
+  SMART: 'https://explorer3.smartcash.cc/tx/',
+  RAP: 'http://explorer.our-rapture.com/tx/',
+  QMC: 'http://54.38.145.192:8080/tx/',
+  POLIS: 'https://explorer.polispay.org/tx/',
+  PAC: 'http://usa.pacblockexplorer.com:3002/tx/',
+  MNX: 'https://minexexplorer.com/?r=explorer/tx&hash=',
+  BCBC: 'http://be.cleanblockchain.org/tx/',
+  RDD: 'https://live.reddcoin.com',
+  BZC: 'http://35.204.174.237:3001/insight/tx/',
+  ETH: 'https://etherscan.io/tx/',
+  ETH_ROPSTEN: 'https://ropsten.etherscan.io/tx/',
+  SPLTEST: 'http://spltest.explorer.dexstats.info',
 };
 
 const explorerListExt = {
