@@ -1,4 +1,5 @@
 const _komodoAssetChains = [
+  'VRSC',
   'SUPERNET',
   'REVS',
   'PANGEA',
@@ -33,7 +34,6 @@ const _komodoAssetChains = [
   'CHAIN',
   'ZILLA',
   'DSEC',
-  'VRSC',
   'MGNX',
   'CCL',
   'PIRATE',
