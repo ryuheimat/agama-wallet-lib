@@ -70,7 +70,7 @@
     "bitcoinjs-lib-pos": "git://github.com/KomodoPlatform/bitcoinjs-lib-pos",
     "bitcoinjs-lib-zcash": "git://github.com/pbca26/bitcoinjs-lib#zcash",
     "bitcoinjs-message": "^2.0.0",
-    "bitgo-utxo-lib": "git://github.com/pbca26/bitgo-utxo-lib",
+    "bitgo-utxo-lib": "git+https://github.com/VerusCoin/bitgo-utxo-lib.git#react-native",
     "bluebird": "^3.4.7",
     "buffer-reverse": "^1.0.1",
     "coinselect": "github:bitcoinjs/coinselect",
