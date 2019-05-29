@@ -3,9 +3,16 @@
 */
 
 // TODO: runtime extend for kmd assets
+//       use lib flag e.g. lib: 'bitcoinjs-lib'
 // wifAlt can be used for different coin versions that underwent major code base changes
 // this is an experimental option that can lead to key pair derivation errors
 const bitcoin = require('bitcoinjs-lib');
+const bcrypto = require('bitgo-utxo-lib-groestl').crypto;
+
+const groestlHashFunctions = {
+  address: bcrypto.groestl,
+  transaction: bcrypto.sha256,
+};
 
 const networks = {
   btc: bitcoin.networks.bitcoin,
@@ -373,19 +380,6 @@ const networks = {
     sapling: true,
     saplingActivationHeight: 419200,
   },
-  hush: {
-    messagePrefix: '\x19Hush Signed Message:\n',
-    bip44: 197,
-    bip32: {
-      public: 0x0488b21e,
-      private: 0x0488ade4,
-    },
-    pubKeyHash: 0x1cb8,
-    scriptHash: 0x1cbd,
-    wif: 0x80,
-    dustThreshold: 1000,
-    isZcash: true,
-  },
   bzc: {
     messagePrefix: '\x19Bitzec Signed Message:\n',
     bip44: 197,
@@ -417,8 +411,16 @@ const networks = {
     pubKeyHash: 0x1cb8,
     scriptHash: 0x1cbd,
     wif: 0x80,
+    consensusBranchId: {
+      1: 0x00,
+      2: 0x00,
+      3: 0x5ba81b19,
+      4: 0x76b809bb,
+    },
     dustThreshold: 1000,
     isZcash: true,
+    sapling: true,
+    saplingActivationHeight: 476969,
   },
   sng: {
     messagePrefix: '\x19Snowgem Signed Message:\n',
@@ -503,8 +505,9 @@ const networks = {
     dustThreshold: 1000,
     isZcash: true,
   },
-  grs: { // fails to gen a proper addr
+  grs: {
     messagePrefix: '\x19Groestlcoin Signed Message:\n',
+    bech32: 'grs',
     bip44: 17,
     bip32: {
       public: 0x0488b21e,
@@ -514,6 +517,8 @@ const networks = {
     scriptHash: 0x5,
     wif: 0x80,
     dustThreshold: 1000,
+    isGRS: true,
+    hashFunctions: groestlHashFunctions,
   },
   aby: {
     messagePrefix: '\x19ArtByte Signed Message:\n',
@@ -622,8 +627,8 @@ const networks = {
     },
     pubKeyHash: 0x21,
     scriptHash: 0x05,
-    wif: 0xa1,
-    wifAlt: [0xB0],
+    wif: 0xB0,
+    compressed: true, 
   },
   // https://github.com/BTA-BATA/BATA-SOURCE/blob/master/src/chainparams.cpp#L156
   bta: {

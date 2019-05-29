@@ -2,7 +2,7 @@
 MIT License
 
 Copyright (c) 2017 Yuki Akiyama, SuperNET
-Copyright (c) 2017 - 2018 SuperNET
+Copyright (c) 2017 - 2019 SuperNET
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Supported coin types: bitcoin, bitcoin forks BTG and BCH, zcash based coins, PoS type coins
-
 */
 
 const bitcoinLib = {
@@ -34,6 +33,7 @@ const bitcoinLib = {
   },
   bitcoinZcash: require('bitcoinjs-lib-zcash'),
   bitcoinZcashSapling: require('bitgo-utxo-lib'),
+  groestlcoinjsLib: require('bitgo-utxo-lib-groestl'),
   bitcoin: require('bitcoinjs-lib'),
 };
 let bitcoin;
@@ -142,12 +142,14 @@ const transactionDecoder = (rawtx, network, debug) => {
     bitcoin = bitcoinLib.bitcoinZcash;
   } else if (network.sapling) {
     bitcoin = bitcoinLib.bitcoinZcashSapling;
+  } else if (network.isGRS) {
+    bitcoin = bitcoinLib.groestlcoinjsLib;
   } else {
     bitcoin = bitcoinLib.bitcoin;
   }
 
   if (debug) {
-    const _tx = bitcoin.Transaction.fromHex(rawtx);
+    const _tx = bitcoin.Transaction.fromHex(rawtx, network ? network : null);
 
     return {
       tx: _tx,
@@ -214,7 +216,7 @@ const transactionDecoder = (rawtx, network, debug) => {
   }
 
   try {
-    const _tx = network.isPoS ? bitcoin.Transaction.fromHex(rawtx, network) : bitcoin.Transaction.fromHex(rawtx);
+    const _tx = network.isPoS || network.isGRS ? bitcoin.Transaction.fromHex(rawtx, network) : bitcoin.Transaction.fromHex(rawtx);
     
     return {
       tx: _tx,

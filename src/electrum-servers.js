@@ -48,6 +48,10 @@ let _electrumServers = {
     'electrum1.utrum.io:10088:tcp',
     'electrum2.utrum.io:10088:tcp',
   ],
+  k64: [
+    'electrum1.komodore64.com:21245:tcp',
+    'electrum2.komodore64.com:21245:tcp',
+  ],
   coqui: [
     'electrum1.cipig.net:10011:tcp',
     'electrum2.cipig.net:10011:tcp',
@@ -94,6 +98,10 @@ let _electrumServers = {
     'electrum1.cipig.net:10009:tcp',
     'electrum2.cipig.net:10009:tcp',
   ],
+  iln: [
+    'electrum1.ilien.io:65011:tcp',
+    'electrum2.ilien.io:65011:tcp',
+  ],
   pangea: [
     'electrum1.cipig.net:10010:tcp',
     'electrum2.cipig.net:10010:tcp',
@@ -105,10 +113,6 @@ let _electrumServers = {
   mshark: [
     'electrum1.cipig.net:10013:tcp',
     'electrum2.cipig.net:10013:tcp',
-  ],
-  mnz: [
-    'electrum1.cipig.net:10002:tcp',
-    'electrum2.cipig.net:10002:tcp',
   ],
   wlc: [
     'electrum1.cipig.net:10014:tcp',
@@ -129,10 +133,6 @@ let _electrumServers = {
   pizza: [
     'electrum1.cipig.net:10024:tcp',
     'electrum2.cipig.net:10024:tcp',
-  ],
-  vote2018: [
-    'electrum1.cipig.net:10021:tcp',
-    'electrum2.cipig.net:10021:tcp',
   ],
   ninja: [
     'electrum1.fund.ninja:50001:tcp',
@@ -171,9 +171,11 @@ let _electrumServers = {
   ],
   ltc: [
     'electrum-ltc.bysh.me:50001:tcp',
-    'electrum-ltc.ddns.net:50001:tcp',
-    'electrum-ltc.wilv.in:50001:tcp',
+    'node.ispol.sk:50003:tcp',
+    'ltc01.knas.systems:50003:tcp',
+    'ltc.rentonisk.com:50002:ssl',
     'electrum.ltc.xurious.com:50001:tcp',
+    'backup.electrum-ltc.org:50001:tcp',
   ],
   fair: [
     'electrum1.cipig.net:10063:tcp',
@@ -219,6 +221,8 @@ let _electrumServers = {
     'bch.imaginary.cash:50001:tcp',
     'electroncash.dk:50001:tcp',
     'wallet.satoshiscoffeehouse.com:50001:tcp',
+    'electron.coinucopia.io:50001:tcp',
+    'electron-cash.dragon.zone:50001:tcp',
   ],
   /*arg: [
     'electrum1.cipig.net:10068:tcp',
@@ -268,8 +272,13 @@ let _electrumServers = {
     'electrum2.cipig.net:10056:tcp',
   ],
   grs: [
-    'electrum10.groestlcoin.org:50001:tcp',
-    'electrum11.groestlcoin.org:50001:tcp',
+    'electrum1.groestlcoin.org:50002:ssl',
+    'electrum2.groestlcoin.org:50002:ssl',
+    'electrum6.groestlcoin.org:50002:ssl',
+    'electrum7.groestlcoin.org:50002:ssl',
+    'electrum8.groestlcoin.org:50002:ssl',
+    'electrum9.groestlcoin.org:50002:ssl',
+    'electrum10.groestlcoin.org:50002:ssl',
   ],
   qtum: [
     's1.qtum.info:50001:tcp',
@@ -304,11 +313,6 @@ let _electrumServers = {
     'electrum2.cipig.net:10074:tcp',
     'electrum3.cipig.net:10074:tcp',
   ],
-  gbx: [
-    'electrum1.cipig.net:10073:tcp',
-    'electrum2.cipig.net:10073:tcp',
-    'electrum3.cipig.net:10073:tcp',
-  ],
   mnx: [
     'electrum1.cipig.net:10079:tcp',
     'electrum2.cipig.net:10079:tcp',
@@ -328,14 +332,9 @@ let _electrumServers = {
     'electrum2.cipig.net:10075:tcp',
     'electrum3.cipig.net:10075:tcp',
   ],
-  xmcc: [
-    'electrum1.cipig.net:10076:tcp',
-    'electrum2.cipig.net:10076:tcp',
-    'electrum3.cipig.net:10076:tcp',
-  ],
   xzc: [
     'electrumx01.zcoin.io:50001:tcp',
-    'electrumx02.zcoin.io":50001:tcp',
+    'electrumx02.zcoin.io:50001:tcp',
     '45.63.92.224:50001:tcp',
     '45.77.67.235:50001:tcp',
   ],
@@ -502,7 +501,41 @@ let _electrumServers = {
   uis: [
     '194.87.145.250:50040:ssl',
   ],
+  ksb: [
+    '51.158.74.137:50001:tcp',
+    'electrum.komodochainz.info:50041:tcp',
+  ],
+  our: [
+    '51.158.74.137:50002:tcp',
+    'electrum.komodochainz.info:50042:tcp',
+  ],
+  rick: [
+    '116.203.111.225:10004:tcp',
+    '116.203.120.175:10004:tcp',
+    '116.203.40.22:10004:tcp',
+  ],
+  morty: [
+    '116.203.111.225:10005:tcp',
+    '116.203.120.175:10005:tcp',
+    '116.203.40.22:10005:tcp',
+  ],
+  vote2019: [
+    'electrum1.cipig.net:10036:tcp',
+    'electrum2.cipig.net:10036:tcp',
+    'electrum3.cipig.net:10036:tcp',
+  ],
+  zex: [
+    'electrum1.cipig.net:10035:tcp',
+    'electrum2.cipig.net:10035:tcp',
+    'electrum3.cipig.net:10035:tcp',
+  ],
+  rfox: [
+    'electrum1.cipig.net:10034:tcp',
+    'electrum2.cipig.net:10034:tcp',
+    'electrum3.cipig.net:10034:tcp',
+  ],
 };
+_electrumServers.zexo = _electrumServers.zex;
 
 let electrumServers = {};
 

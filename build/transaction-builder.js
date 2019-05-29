@@ -4,9 +4,12 @@ var bitcoinJSForks = require('bitcoinforksjs-lib');
 var bitcoinZcash = require('bitcoinjs-lib-zcash');
 var bitcoinPos = require('bitcoinjs-lib-pos');
 var bitcoinZcashSapling = require('bitgo-utxo-lib');
+var groestlcoinjsLib = require('bitgo-utxo-lib-groestl');
 var bitcoin = require('bitcoinjs-lib');
 var coinselect = require('coinselect');
 var utils = require('./utils');
+
+// TODO: eth wrapper
 
 // current multisig limitations: no PoS, no btc forks
 var transaction = function transaction(sendTo, changeAddress, wif, network, utxo, changeValue, spendValue, options) {
@@ -30,6 +33,8 @@ var transaction = function transaction(sendTo, changeAddress, wif, network, utxo
       pk: bitcoinJSForks.crypto.hash160(keyPair.getPublicKeyBuffer()),
       spk: bitcoinJSForks.script.pubKeyHash.output.encode(bitcoinJSForks.crypto.hash160(keyPair.getPublicKeyBuffer()))
     };
+  } else if (network.isGRS) {
+    tx = new groestlcoinjsLib.TransactionBuilder(network);
   } else {
     tx = !options || options && !options.multisig || options && options.multisig && options.multisig.creator ? new bitcoin.TransactionBuilder(network) : new bitcoin.TransactionBuilder.fromTransaction(bitcoin.Transaction.fromHex(options.multisig.rawtx, network), network);
   }
@@ -64,7 +69,7 @@ var transaction = function transaction(sendTo, changeAddress, wif, network, utxo
     }
 
     if (options && options.opreturn) {
-      var _data = Buffer.from(opreturn, 'utf8');
+      var _data = Buffer.from(options.opreturn, 'utf8');
       var dataScript = bitcoin.script.nullData.output.encode(_data);
 
       tx.addOutput(dataScript, 1000);
@@ -127,6 +132,7 @@ var transaction = function transaction(sendTo, changeAddress, wif, network, utxo
 // TODO: merge sendmany
 var data = function data(network, value, fee, outputAddress, changeAddress, utxoList) {
   var btcFee = fee.perbyte ? fee.value : null; // TODO: coin non specific switch static/dynamic fee
+  var inputValue = value;
 
   if (btcFee) {
     fee = 0;
@@ -134,32 +140,28 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
 
   if (utxoList && utxoList.length && utxoList[0] && utxoList[0].txid) {
     var utxoListFormatted = [];
+    var interestClaimThreshold = 200;
     var totalInterest = 0;
     var totalInterestUTXOCount = 0;
-    var interestClaimThreshold = 200;
     var utxoVerified = true;
 
     for (var i = 0; i < utxoList.length; i++) {
-      var _utxo = void 0;
+      var _utxo = {
+        txid: utxoList[i].txid,
+        vout: utxoList[i].vout,
+        value: Number(utxoList[i].amountSats || utxoList[i].value),
+        verified: utxoList[i].verified ? utxoList[i].verified : false
+      };
 
       if (network.kmdInterest) {
-        _utxo = {
-          txid: utxoList[i].txid,
-          vout: utxoList[i].vout,
-          value: Number(utxoList[i].amountSats || utxoList[i].value),
-          interestSats: Number(utxoList[i].interestSats || utxoList[i].interest || 0),
-          verified: utxoList[i].verified ? utxoList[i].verified : false
-        };
-      } else {
-        _utxo = {
-          txid: utxoList[i].txid,
-          vout: utxoList[i].vout,
-          value: Number(utxoList[i].amountSats || utxoList[i].value),
-          verified: utxoList[i].verified ? utxoList[i].verified : false
-        };
+        _utxo.interestSats = Number(utxoList[i].interestSats || utxoList[i].interest || 0);
       }
 
-      if (utxoList[i].currentHeight) {
+      if (utxoList[i].hasOwnProperty('dpowSecured')) {
+        _utxo.dpowSecured = utxoList[i].dpowSecured;
+      }
+
+      if (utxoList[i].hasOwnProperty('currentHeight')) {
         _utxo.currentHeight = utxoList[i].currentHeight;
       }
 
@@ -167,6 +169,11 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
     }
 
     var _maxSpendBalance = Number(utils.maxSpendBalance(utxoListFormatted));
+
+    if (value > _maxSpendBalance) {
+      return 'Spend value is too large or unconfirmed UTXO(S). Max available amount is ' + Number((_maxSpendBalance * 0.00000001).toFixed(8));
+    }
+
     var targets = [{
       address: outputAddress,
       value: value > _maxSpendBalance ? _maxSpendBalance : value
@@ -206,8 +213,13 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
 
     if (btcFee) {
       value = outputs[0].value;
-    } else if (_change > 0) {
+    } else if (_change >= 0) {
       value = outputs[0].value - fee;
+    }
+
+    if (outputs[0].value === value + fee) {
+      outputs[0].value === outputs[0].value - fee;
+      targets[0].value = targets[0].value - fee;
     }
 
     // check if any outputs are unverified
@@ -227,16 +239,11 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
       }
     }
 
-    var _maxSpend = utils.maxSpendBalance(utxoListFormatted);
-
-    if (value > _maxSpend) {
-      return 'Spend value is too large. Max available amount is ' + Number((_maxSpend * 0.00000001).toFixed(8));
-    }
     // account for KMD interest
     if (network.kmdInterest && totalInterest > 0) {
       // account for extra vout
 
-      if (_maxSpend - fee === value) {
+      if (_maxSpendBalance - fee === value) {
         _change = totalInterest - _change;
 
         if (outputAddress === changeAddress) {
@@ -250,6 +257,11 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
       // double check kmd interest is combined into 1 output
       if (outputAddress === changeAddress && _change > 0) {
         value += _change - fee;
+
+        if (Math.abs(value - inputValue) > fee) {
+          value += fee;
+        }
+
         _change = 0;
       }
     }
@@ -257,13 +269,20 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
     if (!inputs && !outputs) {
       return 'Can\'t find best fit utxo. Try lower amount.';
     }
+
     var vinSum = 0;
 
     for (var _i4 = 0; _i4 < inputs.length; _i4++) {
       vinSum += inputs[_i4].value;
     }
 
-    var _estimatedFee = vinSum - outputs[0].value - _change;
+    var voutSum = 0;
+
+    for (var _i5 = 0; _i5 < outputs.length; _i5++) {
+      voutSum += outputs[_i5].value;
+    }
+
+    var _estimatedFee = vinSum - voutSum - totalInterest;
 
     // double check no extra fee is applied
     if (vinSum - value - _change > fee) {
@@ -284,6 +303,7 @@ var data = function data(network, value, fee, outputAddress, changeAddress, utxo
       network: network,
       change: _change,
       value: value,
+      inputValue: inputValue,
       inputs: inputs,
       outputs: outputs,
       targets: targets,
