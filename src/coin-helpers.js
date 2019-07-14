@@ -5,7 +5,6 @@ const _komodoAssetChains = [
   'MGNX',
   'DION',
   'PTX',
-  'ZEX',
   'SUPERNET',
   'REVS',
   'PANGEA',
@@ -46,7 +45,6 @@ const _komodoAssetChains = [
   'DION',
   'KMDICE',
   'PTX',
-  'ZEX',
   'SPLTEST',
   'LUMBER',
   'KSB',
@@ -57,7 +55,8 @@ const _komodoAssetChains = [
   'MTST3',
   'RFOX',
   'HUSH',
-  'ZEXO'
+  'ZEXO',
+  'LABS',
 ];
 
 const _komodoCoins = _komodoAssetChains.concat([
@@ -122,7 +121,6 @@ const explorerList = {
   DION: 'https://explorer.dionpay.com',
   KMDICE: 'http://kmdice.explorer.dexstats.info',
   PTX: 'http://explorer1.patenttx.com',
-  ZEX: 'http://zex.explorer.dexstats.info',
   LUMBER: 'https://explorer.lumberscout.io',
   KSB: 'http://ksb.explorer.dexstats.info',
   OUR: 'http://our.explorer.dexstats.info',
@@ -132,6 +130,7 @@ const explorerList = {
   MTST3:  'http://explorer.marmara.io',
   RFOX: 'https://rfox.kmdexplorer.io',
   ZEXO: 'http://zexo.explorer.dexstats.info',
+  LABS: 'http://labs.explorer.dexstats.info',
   // non-kmd coins
   QTUM: 'https://explorer.qtum.org',
   DNR: 'http://denarius.name',
