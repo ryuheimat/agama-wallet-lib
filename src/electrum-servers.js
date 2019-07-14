@@ -151,9 +151,11 @@ let _electrumServers = {
     'electrum2.cipig.net:10060:tcp',
   ],
   via: [
-    'viax1.bitops.me:50001:tcp',
-    'viax2.bitops.me:50001:tcp',
-    'viax3.bitops.me:50001.tcp',
+    'viax1.bitops.me:50001:tcp', 
+    'viax2.bitops.me:50001:tcp', 
+    'viax3.bitops.me:50001:tcp',
+    'server.vialectrum.org:50001:tcp',
+    'server2.vialectrum.org:50001:tcp',
   ],
   vtc: [
     'fr1.vtconline.org:55001:tcp',
@@ -256,16 +258,18 @@ let _electrumServers = {
     'electrum2.cipig.net:10055:tcp',
   ],
   hodlc: [
-    'hodl.amit177.cf:17989:tcp',
-    'hodl2.amit177.cf:17898:tcp',
+    'hodl.amit.systems:17989:tcp',
+    'hodl2.amit.systems:17898:tcp',
   ],
   suqa: [
     'electrum1.suqa.org:12159:tcp',
     'electrum2.suqa.org:12159:tcp',
   ],
   btx: [
-    'electrum1.cipig.net:10057:tcp',
-    'electrum2.cipig.net:10057:tcp',
+    'ele1.bitcore.cc:50001:tcp',
+    'ele2.bitcore.cc:50001:tcp',
+    'ele3.bitcore.cc:50001:tcp',
+    'ele4.bitcore.cc:50001:tcp',
   ],
   btcz: [
     'electrum1.cipig.net:10056:tcp',
@@ -309,9 +313,10 @@ let _electrumServers = {
     'electrumx3.fujicoin.org:50002:ssl',
   ],
   ftc: [
-    'electrum1.cipig.net:10074:tcp',
-    'electrum2.cipig.net:10074:tcp',
-    'electrum3.cipig.net:10074:tcp',
+    'electrumx-ch-1.feathercoin.ch:50001:tcp',
+    'electrumx-de-2.feathercoin.ch:50001:tcp',
+    'electrumx-gb-1.feathercoin.network:50001:tcp',
+    'electrumx-gb-2.feathercoin.network:50001:tcp',
   ],
   mnx: [
     'electrum1.cipig.net:10079:tcp',
@@ -510,21 +515,21 @@ let _electrumServers = {
     'electrum.komodochainz.info:50042:tcp',
   ],
   rick: [
-    '116.203.111.225:10004:tcp',
-    '116.203.120.175:10004:tcp',
-    '116.203.40.22:10004:tcp',
+    'electrum1.cipig.net:10017:tcp',
+    'electrum2.cipig.net:10017:tcp',
+    'electrum3.cipig.net:10017:tcp',
   ],
   morty: [
-    '116.203.111.225:10005:tcp',
-    '116.203.120.175:10005:tcp',
-    '116.203.40.22:10005:tcp',
+    'electrum1.cipig.net:10018:tcp',
+    'electrum2.cipig.net:10018:tcp',
+    'electrum3.cipig.net:10018:tcp',
   ],
   vote2019: [
     'electrum1.cipig.net:10036:tcp',
     'electrum2.cipig.net:10036:tcp',
     'electrum3.cipig.net:10036:tcp',
   ],
-  zex: [
+  zexo: [
     'electrum1.cipig.net:10035:tcp',
     'electrum2.cipig.net:10035:tcp',
     'electrum3.cipig.net:10035:tcp',
@@ -534,8 +539,12 @@ let _electrumServers = {
     'electrum2.cipig.net:10034:tcp',
     'electrum3.cipig.net:10034:tcp',
   ],
+  labs: [
+    'electrum1.cipig.net:10019:tcp',
+    'electrum2.cipig.net:10019:tcp',
+    'electrum3.cipig.net:10019:tcp',
+  ],
 };
-_electrumServers.zexo = _electrumServers.zex;
 
 let electrumServers = {};
 
@@ -550,4 +559,11 @@ for (let key in _electrumServers) {
   }
 }
 
-module.exports = electrumServers;
+const proxyServersHttps = ['el0.vrsc.0x03.services', 'el1.vrsc.0x03.services', 'el2.vrsc.0x03.services'];
+const proxyServersHttp = ['94.130.225.86:80', '94.130.225.86:80'];
+
+module.exports = {
+  proxyServersHttps,
+  proxyServersHttp,
+  electrumServers
+};
