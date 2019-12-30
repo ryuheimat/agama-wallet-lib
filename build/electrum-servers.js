@@ -17,7 +17,6 @@ var _electrumServers = {
   bntn: ['electrum1.cipig.net:10026:tcp', 'electrum2.cipig.net:10026:tcp'],
   eql: ['159.65.91.235:10801:tcp', '167.99.204.42:10801:tcp'],
   oot: ['electrum1.utrum.io:10088:tcp', 'electrum2.utrum.io:10088:tcp'],
-  k64: ['electrum1.komodore64.com:21245:tcp', 'electrum2.komodore64.com:21245:tcp'],
   coqui: ['electrum1.cipig.net:10011:tcp', 'electrum2.cipig.net:10011:tcp'],
   chain: ['electrum1.cipig.net:10032:tcp', 'electrum2.cipig.net:10032:tcp', 'electrum3.cipig.net:10032:tcp'],
   kmdice: ['electrum1.cipig.net:10031:tcp', 'electrum2.cipig.net:10031:tcp', 'electrum3.cipig.net:10031:tcp'],
@@ -58,7 +57,7 @@ var _electrumServers = {
   btg: ['electrumx-eu.bitcoingold.org:50001:tcp', 'electrumx-us.bitcoingold.org:50001:tcp'],
   blk: ['electrum1.cipig.net:10054:tcp', 'electrum2.cipig.net:10054:tcp', 'electrum3.cipig.net:10054:tcp'],
   sib: ['electrum1.cipig.net:10050:tcp', 'electrum2.cipig.net:10050:tcp'],
-  bch: ['bch.imaginary.cash:50001:tcp', 'electroncash.dk:50001:tcp', 'wallet.satoshiscoffeehouse.com:50001:tcp', 'electron.coinucopia.io:50001:tcp', 'electron-cash.dragon.zone:50001:tcp'],
+  bch: ['bch.imaginary.cash:50001:tcp', 'wallet.satoshiscoffeehouse.com:50001:tcp'],
   /*arg: [
     'electrum1.cipig.net:10068:tcp',
     'electrum2.cipig.net:10068:tcp',
@@ -87,7 +86,7 @@ var _electrumServers = {
   ftc: ['electrumx-ch-1.feathercoin.ch:50001:tcp', 'electrumx-de-2.feathercoin.ch:50001:tcp', 'electrumx-gb-1.feathercoin.network:50001:tcp', 'electrumx-gb-2.feathercoin.network:50001:tcp'],
   mnx: ['electrum1.cipig.net:10079:tcp', 'electrum2.cipig.net:10079:tcp', 'electrum3.cipig.net:10079:tcp'],
   ccl: ['electrum1.cipig.net:10029:tcp', 'electrum2.cipig.net:10029:tcp', 'electrum3.cipig.net:10029:tcp'],
-  vrsc: ['el0.vrsc.0x03.services:10000:tcp', 'el1.vrsc.0x03.services:10000:tcp'],
+  vrsc: ['el0.vrsc.veruscoin.io:17485:tcp', 'el1.vrsc.veruscoin.io:17485:tcp', 'el2.vrsc.veruscoin.io:17485:tcp'],
   polis: ['electrum1.cipig.net:10075:tcp', 'electrum2.cipig.net:10075:tcp', 'electrum3.cipig.net:10075:tcp'],
   xzc: ['electrumx01.zcoin.io:50001:tcp', 'electrumx02.zcoin.io:50001:tcp', '45.63.92.224:50001:tcp', '45.77.67.235:50001:tcp'],
   // unverified to work
@@ -158,4 +157,11 @@ for (var key in _electrumServers) {
   }
 }
 
-module.exports = electrumServers;
+var proxyServersHttps = ['el0.vrsc.0x03.services', 'el1.vrsc.0x03.services', 'el2.vrsc.0x03.services'];
+var proxyServersHttp = ['94.130.225.86:80', '94.130.225.86:80'];
+
+module.exports = {
+  proxyServersHttps: proxyServersHttps,
+  proxyServersHttp: proxyServersHttp,
+  electrumServers: electrumServers
+};
