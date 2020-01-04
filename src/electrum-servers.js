@@ -553,7 +553,7 @@ for (let key in _electrumServers) {
   }
 }
 
-const proxyServersHttps = ['el0.vrsc.0x03.services', 'el1.vrsc.0x03.services', 'el2.vrsc.0x03.services'];
+const proxyServersHttps = ['el0.0x03.services', 'el1.0x03.services', 'el2.vrsc.services'];
 const proxyServersHttp = ['94.130.225.86:80', '94.130.225.86:80'];
 
 module.exports = {
