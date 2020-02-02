@@ -94,10 +94,6 @@ let _electrumServers = {
     'electrum1.cipig.net:10009:tcp',
     'electrum2.cipig.net:10009:tcp',
   ],
-  iln: [
-    'electrum1.ilien.io:65011:tcp',
-    'electrum2.ilien.io:65011:tcp',
-  ],
   pangea: [
     'electrum1.cipig.net:10010:tcp',
     'electrum2.cipig.net:10010:tcp',

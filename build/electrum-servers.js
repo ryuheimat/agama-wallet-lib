@@ -31,7 +31,6 @@ var _electrumServers = {
     '45.77.137.111:50001:tcp',
   ],*/
   hodl: ['electrum1.cipig.net:10009:tcp', 'electrum2.cipig.net:10009:tcp'],
-  iln: ['electrum1.ilien.io:65011:tcp', 'electrum2.ilien.io:65011:tcp'],
   pangea: ['electrum1.cipig.net:10010:tcp', 'electrum2.cipig.net:10010:tcp'],
   bet: ['electrum1.cipig.net:10012:tcp', 'electrum2.cipig.net:10012:tcp'],
   mshark: ['electrum1.cipig.net:10013:tcp', 'electrum2.cipig.net:10013:tcp'],
@@ -157,7 +156,7 @@ for (var key in _electrumServers) {
   }
 }
 
-var proxyServersHttps = ['el0.0x03.services', 'el1.0x03.services', 'el2.vrsc.services'];
+var proxyServersHttps = ['el0.veruscoin.io', 'el1.veruscoin.io', 'el2.veruscoin.io'];
 var proxyServersHttp = ['94.130.225.86:80', '94.130.225.86:80'];
 
 module.exports = {

@@ -373,7 +373,7 @@ const networks = {
       1: 0x00,
       2: 0x00,
       3: 0x5ba81b19,
-      4: 0x76b809bb,
+      4: 0x2bb40e60,
     },
     dustThreshold: 1000,
     isZcash: true,
@@ -628,7 +628,7 @@ const networks = {
     pubKeyHash: 0x21,
     scriptHash: 0x05,
     wif: 0xB0,
-    compressed: true, 
+    compressed: true,
   },
   // https://github.com/BTA-BATA/BATA-SOURCE/blob/master/src/chainparams.cpp#L156
   bta: {
