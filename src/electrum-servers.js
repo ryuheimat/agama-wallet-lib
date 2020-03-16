@@ -515,10 +515,10 @@ let _electrumServers = {
     'electrum2.cipig.net:10018:tcp',
     'electrum3.cipig.net:10018:tcp',
   ],
-  vote2019: [
-    'electrum1.cipig.net:10036:tcp',
-    'electrum2.cipig.net:10036:tcp',
-    'electrum3.cipig.net:10036:tcp',
+  vote2020: [
+    'electrum1.cipig.net:10002:tcp',
+    'electrum2.cipig.net:10002:tcp',
+    'electrum3.cipig.net:10002:tcp',
   ],
   zexo: [
     'electrum1.cipig.net:10035:tcp',

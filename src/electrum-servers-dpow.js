@@ -43,7 +43,7 @@ const dpowCoins = [
   'RICK',
   'SEC',
   'KSB',
-  'VOTE2019',
+  'VOTE2020',
   'HUSH3',
   'KOIN',
 ];
