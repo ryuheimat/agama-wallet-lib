@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /******************************************************************************
  * Copyright © 2016 The Waves Core Developers.                             	  *
@@ -16,10 +16,10 @@
  *                                                                            *
  ******************************************************************************/
 
-var bip39 = require('bip39');
+var bip39 = require("react-native-bip39");
 
 var _hasDuplicates = function _hasDuplicates(seed) {
-  seed = seed.split(' ');
+  seed = seed.split(" ");
   return new Set(seed).size !== seed.length;
 };
 
@@ -27,8 +27,8 @@ var passphraseGenerator = {
   hasDuplicates: function hasDuplicates(seed) {
     return _hasDuplicates(seed);
   },
-  generatePassPhrase: function generatePassPhrase(bitsval) {
-    var seed = bip39.generateMnemonic(bitsval);
+  generatePassPhrase: async function generatePassPhrase(bitsval) {
+    var seed = await bip39.generateMnemonic(bitsval);
 
     while (_hasDuplicates(seed)) {
       seed = bip39.generateMnemonic(bitsval);

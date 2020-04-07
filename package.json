@@ -65,7 +65,6 @@
   "dependencies": {
     "bigi": "^1.4.2",
     "bip32": "^1.0.2",
-    "bip39": "^2.4.0",
     "bitcoinforksjs-lib": "git+https://github.com/SuperNETorg/bitcoinjs-lib#opt-in-bitcoincash-sighash",
     "bitcoinjs-lib": "https://github.com/SuperNETorg/bitcoinjs-lib",
     "bitcoinjs-lib-pos": "git+https://github.com/KomodoPlatform/bitcoinjs-lib-pos",
@@ -86,6 +85,7 @@
     "nodejs-aes256": "^1.0.1",
     "npm": "^6.13.4",
     "passwd-strength": "git+https://github.com/pbca26/passwd-strength",
+    "react-native-bip39": "^2.3.0",
     "sha256": "^0.2.0",
     "tx-decoder": "git+https://github.com/pbca26/tx-decoder",
     "wif": "^2.0.6"
